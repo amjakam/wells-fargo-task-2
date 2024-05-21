@@ -1,36 +1,23 @@
 package com.wellsfargo.counselor.entity;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.time.LocalTime;
 
 @Entity
 public class Advisor {
 
     @Id
-    @GeneratedValue()
-    private long advisorId;
-
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long advisorId;
     private String firstName;
-
-    @Column(nullable = false)
     private String lastName;
-
-    @Column(nullable = false)
     private String address;
-
-    @Column(nullable = false)
     private String phone;
-
-    @Column(nullable = false)
     private String email;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
-    protected Advisor() {
-
-    }
+    protected Advisor() {}
 
     public Advisor(String firstName, String lastName, String address, String phone, String email) {
         this.firstName = firstName;
@@ -40,11 +27,23 @@ public class Advisor {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return String.format(
+                "Advisor[id=%d, firstName='%s', lastName='%s', address='%s', phone='%s', email='%s', startTime='%s', endTime='%s']",
+                advisorId, firstName, lastName, address, phone, email, startTime, endTime);
+    }
+
+    // Getters and setters
     public Long getAdvisorId() {
         return advisorId;
     }
 
-    public String getFirstName() {
+    public void setAdvisorId(Long advisorId) {
+        this.advisorId = advisorId;
+    }
+
+    public String    getFirstName() {    
         return firstName;
     }
 
@@ -82,5 +81,21 @@ public class Advisor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }
